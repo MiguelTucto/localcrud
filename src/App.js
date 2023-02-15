@@ -1,23 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import { Menubar } from 'primereact/menubar';
+import { Button } from 'primereact/button';
 
+import React from "react";
+import {Route, Routes} from "react-router-dom";
+import UserList from "./components/user-list";
+import FormUser from "./components/form-user";
 function App() {
+    const items = [
+        {
+            label: "Users",
+            icon: 'pi pi-fw pi-database',
+            url: '/user-list'
+        },
+        {
+            label: "Form",
+            icon: 'pi pi-fw pi-user',
+            url: '/user-form'
+        }
+    ]
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Menubar model={items} />
+      <Routes>
+          <Route path="/user-list" element={<UserList />}></Route>
+          <Route path="/user-form" element={<FormUser />}></Route>
+      </Routes>
     </div>
   );
 }
