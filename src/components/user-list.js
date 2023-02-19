@@ -28,11 +28,13 @@ function UserList(){
     const [visible, setVisible] = useState(false);
 
     const createData = (data) => {
+        data.id = Date.now();
         setUsers([...users, data]);
     };
 
     const editData = (data) => {
-
+        let newData = users.map(e => e.id === data.id ? data : e );
+        setUsers(newData);
     };
 
     const deleteData = (data) => {
@@ -41,7 +43,7 @@ function UserList(){
     return(
         <div>
             <Button icon="pi pi-plus" onClick={() => setVisible(true)}/>
-            <UserShow data={users} />
+            <UserShow users={users} dataToEdit={dataToEdit} setDataToEdit={setDataToEdit} editData={editData} />
             <Dialog onHide={() => setVisible(false)} visible={visible} header="Put your information">
                 <FormUser createData={createData} />
             </Dialog>

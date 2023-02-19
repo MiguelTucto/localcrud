@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { InputText } from 'primereact/inputtext';
 import {Button} from "primereact/button";
 
@@ -7,8 +7,16 @@ const initialForm = {
     name: "",
     age: null,
 };
-function FormUser({createData}) {
+function FormUser({createData, dataToEdit, editData, setDataToEdit}) {
     const [form, setForm] = useState(initialForm);
+
+    useEffect(() => {
+        if(dataToEdit) {
+            setForm(dataToEdit);
+        } else{
+            setForm(initialForm);
+        }
+    },[dataToEdit])
 
     const handleChange = (e) => {
         setForm({...form, [e.target.name]: e.target.value});
@@ -21,16 +29,15 @@ function FormUser({createData}) {
             alert("Complete fields");
             return;
         }
-
         if(form.id === null){
             createData(form);
+        } else {
+            editData(form);
         }
-
         handleReset();
-
     };
 
-    const handleReset = (e) => {
+    const handleReset = () => {
         setForm(initialForm);
     };
     return(

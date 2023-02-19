@@ -1,11 +1,11 @@
 import React from "react";
 import UserSlot from "./user-slot";
-function UserShow({data, createData}) {
+function UserShow({users, dataToEdit, setDataToEdit, editData}) {
     return(
         <div>
             {
-                data.map(e =>
-                    <UserSlot key={e.id} data={e} createData={createData}/>
+                users.map(e =>
+                    <UserSlot key={e.id} users={e} dataToEdit={dataToEdit} setDataToEdit={setDataToEdit} editData={editData} />
                 )
             }
         </div>
